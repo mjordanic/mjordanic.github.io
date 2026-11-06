@@ -1,0 +1,162 @@
+---
+import { Picture } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import data from "../content/projects.json";
+import cv from "../content/cv.json";
+import { projectImage } from "../lib/projectImages";
+
+const github = cv.contact.links.find((l) => l.label === "GitHub")!;
+const names = data.projects.map((p) => p.name);
+---
+
+<Base
+  title="Projects"
+  description={`Personal projects by ${cv.profile.name}: ${names.slice(0, -1).join(", ")} and ${names.at(-1)}. Code on GitHub, with live demos where available.`}
+>
+  <div class="wrap">
+    <header class="page-head">
+      <h1>Projects</h1>
+      <p class="lede">
+        Personal projects I build to try out ideas end to end, from data to a small working interface. All the code is on{" "}
+        <a href={github.url}>GitHub</a>.
+      </p>
+      <nav aria-label="Projects on this page">
+        <ul class="tags">
+          {
+            data.projects.map((p) => (
+              <li>
+                <a class="tag" href={`#${p.slug}`}>
+                  {p.name}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </header>
+
+    {
+      data.projects.map((p, i) => (
+        <article id={p.slug} class="cv-section project" aria-labelledby={`${p.slug}-h`}>
+          <div class="project-side">
+            <h2 id={`${p.slug}-h`}>{p.name}</h2>
+            <p class="label">{p.kicker}</p>
+          </div>
+          <div>
+            <p class="summary">{p.summary}</p>
+            <ul class="details">
+              {p.details.map((d) => (
+                <li>{d}</li>
+              ))}
+            </ul>
+            <h3 class="sr-only">Technologies</h3>
+            <ul class="tags tech">
+              {p.tech.map((t) => (
+                <li class="tag">{t}</li>
+              ))}
+            </ul>
+            <div class="btn-row">
+              {p.live && (
+                <a class="btn btn-primary" href={p.live}>
+                  Open live demo <span aria-hidden="true">↗</span>
+                </a>
+              )}
+              <a class="btn" href={p.repo}>
+                Code on GitHub <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+            {p.liveNote && <p class="note muted">{p.liveNote}</p>}
+            <div class:list={["figures", { single: p.images.length === 1 }]}>
+              {p.images.map((img, j) => (
+                <figure>
+                  <Picture
+                    src={projectImage(p.slug, img.file)}
+                    formats={["avif", "webp"]}
+                    fallbackFormat="webp"
+                    widths={[480, 800, 1200]}
+                    sizes={p.images.length === 1 ? "(max-width: 48rem) 100vw, 640px" : "(max-width: 60rem) 100vw, 400px"}
+                    alt={img.alt}
+                    loading={i === 0 && j === 0 ? "eager" : "lazy"}
+                  />
+                  <figcaption class="label">
+                    Fig. {i + 1}.{j + 1} · {p.name}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</Base>
+
+<style>
+  .page-head {
+    padding-block: var(--space-16) var(--space-8);
+  }
+  .lede {
+    max-width: 42rem;
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-6);
+  }
+  .page-head .tag {
+    text-decoration: none;
+  }
+  .page-head .tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .project-side h2 {
+    margin-bottom: var(--space-2);
+  }
+  .summary {
+    max-width: 42rem;
+  }
+  .details {
+    max-width: 42rem;
+    color: var(--ink-muted);
+    margin: 0 0 var(--space-6);
+  }
+  .details li + li {
+    margin-top: var(--space-2);
+  }
+  .tech {
+    margin-bottom: var(--space-6);
+  }
+  .note {
+    margin: var(--space-3) 0 0;
+    font-size: var(--text-sm);
+  }
+  .figures {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+  .figures.single {
+    grid-template-columns: minmax(0, 40rem);
+  }
+  figure {
+    margin: 0;
+    min-width: 0;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  figure :global(img) {
+    width: 100%;
+    height: auto;
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+  }
+  figcaption {
+    padding: var(--space-2) var(--space-3);
+  }
+  @media (max-width: 60rem) {
+    .figures {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

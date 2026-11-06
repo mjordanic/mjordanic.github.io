@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#fbfaf7"/>
+  <rect x="0" y="0" width="1200" height="10" fill="#1d4ed8"/>
+  <text x="90" y="230" font-family="Georgia, 'Times New Roman', serif" font-size="88" font-weight="700" fill="#1c1d21">Mislav Jordanić</text>
+  <text x="92" y="300" font-family="Georgia, 'Times New Roman', serif" font-size="40" fill="#1c1d21">Data scientist at Lamis Technologies · Zagreb</text>
+  <text x="92" y="352" font-family="Helvetica, Arial, sans-serif" font-size="26" fill="#55585f">CV, publications and projects</text>
+  <!-- Career timeline motif: UPC, Aprawa, Pendulum, Lamis -->
+  <g transform="translate(92 440)">
+    <line x1="0" y1="110" x2="1016" y2="110" stroke="#c9c5ba" stroke-width="2"/>
+    <rect x="135" y="0" width="474" height="16" rx="3" fill="#1d4ed8"/>
+    <rect x="609" y="30" width="68" height="16" rx="3" fill="#1d4ed8"/>
+    <rect x="677" y="60" width="203" height="16" rx="3" fill="#1d4ed8"/>
+    <rect x="880" y="90" width="136" height="16" rx="3" fill="#1d4ed8" opacity="0.7"/>
+    <rect x="-8" y="102" width="16" height="16" fill="#c2410c" transform="rotate(45 0 110)"/>
+    <rect x="331" y="102" width="16" height="16" fill="#c2410c" transform="rotate(45 339 110)"/>
+    <rect x="467" y="102" width="16" height="16" fill="#c2410c" transform="rotate(45 475 110)"/>
+  </g>
+  <text x="1108" y="140" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="24" fill="#1d4ed8">mjordanic.github.io</text>
+</svg>

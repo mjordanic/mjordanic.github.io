@@ -1,0 +1,89 @@
+---
+import cv from "../content/cv.json";
+
+const path = Astro.url.pathname;
+const github = cv.contact.links.find((l) => l.label === "GitHub")!;
+const items = [
+  { href: "/#experience", label: "CV" },
+  { href: "/#publications", label: "Publications" },
+  { href: "/projects/", label: "Projects", current: path.startsWith("/projects") },
+];
+---
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-current={path === "/" ? "page" : undefined}>{cv.profile.name}</a>
+    <nav aria-label="Main">
+      <ul>
+        {
+          items.map((i) => (
+            <li>
+              <a href={i.href} aria-current={i.current ? "page" : undefined}>
+                {i.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a class="gh" href={github.url}>GitHub <span aria-hidden="true">↗</span></a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-6);
+    min-height: 3.5rem;
+    padding-block: var(--space-2);
+  }
+  .brand {
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-6);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: var(--text-sm);
+  }
+  nav a {
+    color: var(--ink-muted);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  nav a:hover,
+  nav a[aria-current="page"] {
+    color: var(--ink);
+    text-decoration: underline;
+  }
+  .gh {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  @media (max-width: 40rem) {
+    /* The header wraps to two lines on phones; let it scroll away. */
+    .site-header {
+      position: static;
+    }
+  }
+</style>

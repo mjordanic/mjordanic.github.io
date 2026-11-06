@@ -1,0 +1,165 @@
+{
+  "$comment": "Projects data. Images live in src/assets/projects/<slug>/ and are referenced by file name. Set live to null when a project has no verified deployment.",
+  "projects": [
+    {
+      "slug": "hikesalike",
+      "name": "HikesAlike",
+      "kicker": "Similarity search · geospatial",
+      "summary": "Pick a hike you enjoyed and HikesAlike lists other hikes in Europe that feel similar: comparable length, climb, highest point, landscape and typical weather. You can also describe a hike instead of naming one, and limit results to a driving time from a starting town.",
+      "details": [
+        "Builds a catalogue of roughly 250,000 day hikes and day stages from OpenStreetMap, enriched with elevation, land cover and climate data.",
+        "Each hike becomes a feature vector; similarity weights are adjustable in the interface.",
+        "Optional drive-time filter through a self-hosted Valhalla routing engine.",
+        "Served as a small read-only export on Google Cloud Run."
+      ],
+      "tech": [
+        "Python",
+        "OpenStreetMap",
+        "SQLite",
+        "Valhalla",
+        "Leaflet",
+        "Cloud Run"
+      ],
+      "repo": "https://github.com/mjordanic/outdoors_destinations",
+      "live": "https://hikesalike.com",
+      "liveNote": "The server sleeps when idle, so the first load can take around 20 seconds.",
+      "images": [
+        {
+          "file": "seed-hike.png",
+          "alt": "HikesAlike page for the Aljažev dom to Triglav hike, showing the route on a map, its elevation profile and summary chips for distance and climb."
+        },
+        {
+          "file": "similar-hikes.png",
+          "alt": "Table of ten hikes similar to the climb to Triglav, each with a similarity score and coloured cells for how alike it is on length and climbing."
+        }
+      ]
+    },
+    {
+      "slug": "supply-chain",
+      "name": "Supply chain simulator",
+      "kicker": "Simulation · inventory policy · RL",
+      "summary": "A small multi-echelon retail supply chain simulator. Factories, warehouses, shops and customers form a directed graph that shares one stochastic world with seasonality and disruptions. Each node runs its own replenishment policy, so ordering rules can be compared on identical random worlds.",
+      "details": [
+        "Textbook inventory policies — (s,S), (s,Q), (R,S) and (R,s,S) — extended to route orders across several suppliers.",
+        "A PPO reinforcement learning policy trained against the textbook baseline with common random numbers, plus an Optuna tuner.",
+        "Optional LLM world generator and replay of real demand from the M5 (Walmart) dataset.",
+        "Work in progress on JEPA-style world-model policies on experimental branches.",
+        "A limited Streamlit demo compares four policies on one shop and includes a 30-world check of whether a gap is luck."
+      ],
+      "tech": [
+        "Python",
+        "PyTorch",
+        "PPO",
+        "Optuna",
+        "Streamlit",
+        "Cloud Run"
+      ],
+      "repo": "https://github.com/mjordanic/supply_chain_simulator",
+      "live": "https://supplychain.lamis-technologies.hr",
+      "liveNote": "A limited slice of the simulator. It may take a few seconds to wake up.",
+      "images": [
+        {
+          "file": "policy-lab.png",
+          "alt": "Streamlit supply-chain policy lab showing a scorecard that compares four inventory policies on net profit, fill rate and days out of stock."
+        },
+        {
+          "file": "rl-vs-baseline.png",
+          "alt": "Bar charts comparing a reinforcement learning policy with an order-up-to baseline across 32 paired seeds on service level, stockout rate, turnover, price and revenue."
+        }
+      ]
+    },
+    {
+      "slug": "krovlab",
+      "name": "KrovLab",
+      "kicker": "Computational geometry",
+      "summary": "KrovLab takes a building footprint and a roof pitch and returns the geometry of a hipped roof: faces, hips, ridges, valleys and the quantities a roofer needs. When a plan cannot be roofed it returns a named failure rather than a wrong answer.",
+      "details": [
+        "Weighted straight-skeleton core with no third-party dependencies.",
+        "Supports gables, knee walls, gambrels, courtyards, overhangs, several cells per project and dormers.",
+        "A Flask web demo draws the roof plan and a 3D view, accepts DXF footprints and exports OBJ and GLB meshes.",
+        "Its limitations are documented up front."
+      ],
+      "tech": [
+        "Python",
+        "Computational geometry",
+        "Plotly",
+        "Flask",
+        "DXF"
+      ],
+      "repo": "https://github.com/mjordanic/krovlab",
+      "live": "https://krovlab.lamis-technologies.hr",
+      "liveNote": "The server sleeps when idle, so the first load can take a few seconds.",
+      "images": [
+        {
+          "file": "roof-plan.png",
+          "alt": "Roof plan of an L-shaped building at 45 degrees, with hips in orange, ridges in red, a valley in blue and heights at each vertex."
+        },
+        {
+          "file": "roof-3d.png",
+          "alt": "Three-dimensional view of the same L-shaped hipped roof with its ridge and hip lines."
+        }
+      ]
+    },
+    {
+      "slug": "cv-writer",
+      "name": "CV writer",
+      "kicker": "LLM agents · LangGraph",
+      "summary": "An agentic workflow that drafts a CV and cover letter for a specific job. It reads your existing documents, extracts the job requirements, researches the company, retrieves relevant past projects and iterates on drafts with a critique step, pausing for your input at each decision.",
+      "details": [
+        "LangGraph state machine with separate agents for reading, research, retrieval, routing, writing and critique.",
+        "Two-stage retrieval: vector similarity followed by an LLM relevance check.",
+        "Drafts are scored and refined until they pass a quality threshold; every version is kept.",
+        "PDFs are produced through LLM-written LaTeX, with compiler errors fed back for repair."
+      ],
+      "tech": [
+        "Python",
+        "LangGraph",
+        "LangChain",
+        "RAG",
+        "Tavily",
+        "LaTeX"
+      ],
+      "repo": "https://github.com/mjordanic/CV_editor",
+      "live": null,
+      "liveNote": "Runs locally from the command line; there is no hosted demo.",
+      "images": [
+        {
+          "file": "workflow-graph.png",
+          "alt": "LangGraph workflow diagram: load documents, analyse the job description, research the company and retrieve experience, then a router that loops through drafting, critique and PDF generation for the CV and the cover letter."
+        }
+      ]
+    },
+    {
+      "slug": "aerogrid",
+      "name": "AeroGrid",
+      "kicker": "Optimisation · LLM agents · simulation",
+      "summary": "A research demo that schedules household electricity use against real wholesale prices. It moves flexible loads, such as an EV charger, a hot-water heater, a dishwasher and a washing machine, into cheaper 15-minute slots and can charge and discharge a home battery, while the always-on base load stays as it is.",
+      "details": [
+        "A receding-horizon linear program, with a small mixed-integer step for appliance cycles, solved with HiGHS through CVXPY. Energy deadlines are soft constraints, so the solver always returns a plan.",
+        "The optimiser runs inside a LangGraph loop. Replans are triggered by a new appliance start, a price surprise or a slipping EV deadline, and there is an approval step before a cycle is moved.",
+        "A digital twin replays real SMARD day-ahead prices for Germany and Luxembourg and runs a baseline and two optimiser strategies on the same inputs, so their costs can be compared.",
+        "It is a demo rather than production software; the known gaps are listed in the README."
+      ],
+      "tech": [
+        "Python",
+        "Linear programming",
+        "CVXPY",
+        "HiGHS",
+        "LangGraph"
+      ],
+      "repo": "https://github.com/mjordanic/home-energy-planner",
+      "live": null,
+      "liveNote": "Runs locally as a simulation and notebooks; there is no hosted demo.",
+      "images": [
+        {
+          "file": "power-cap.png",
+          "alt": "Two stacked charts over one day: EV charger and heater power in 15-minute slots, kept under an 8 kW house cap and finished before a 07:00 EV deadline, above the electricity price, which dips between 22:00 and 23:00."
+        },
+        {
+          "file": "agent-loop.png",
+          "alt": "Diagram of the AeroGrid loop: a digital twin streams samples and SMARD prices to a trigger manager, which runs price forecasting, optimisation, a reschedule proposal, an approval gate and plan commit."
+        }
+      ]
+    }
+  ]
+}
