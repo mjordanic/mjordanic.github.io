@@ -2,10 +2,9 @@
 
 Personal CV and portfolio site for Mislav Jordanić, meant for https://mjordanic.github.io.
 
-**Not published yet.** GitHub Pages for this repository is deliberately pointed at `main:/docs`, and that
-folder does not exist, so nothing is served. Keep it that way until the site is approved: do not create a
-top-level `docs/` folder and do not add a Pages deploy workflow before then. The steps to switch publishing on
-are under [Publishing](#publishing-after-approval).
+Published at https://mjordanic.github.io. GitHub Pages is set to the **GitHub Actions** source, and
+`.github/workflows/deploy.yml` builds and deploys the site on every push to `main`. Do not create a top-level
+`docs/` folder; the build output is `dist/`.
 
 A static [Astro](https://astro.build) site with no server runtime and no client-side JavaScript. The dark
 variant follows the visitor's system setting.
@@ -47,21 +46,15 @@ rsvg-convert -w 32 -h 32 public/favicon.svg -o public/favicon-32.png
 rsvg-convert -w 180 -h 180 -b '#1d4ed8' public/favicon.svg -o public/apple-touch-icon.png
 ```
 
-## Publishing (after approval)
+## Publishing
 
-Do this only once the site has been approved. The build writes to `dist/`, which is git-ignored, so the
-recommended route is to let GitHub Actions build and deploy it:
+The build writes to `dist/`, which is git-ignored. `.github/workflows/deploy.yml` checks out the repository,
+installs Node from `.node-version`, runs `npm ci` and `npm run build`, uploads `dist/` with
+`actions/upload-pages-artifact` and publishes it with `actions/deploy-pages`. It runs on pushes to `main` and
+can also be started by hand from the Actions tab (`workflow_dispatch`).
 
-1. Add the official Astro Pages workflow as `.github/workflows/deploy.yml` (see
-   [Astro: Deploy to GitHub Pages](https://docs.astro.build/en/guides/deploy/github/)). It uses
-   `withastro/action` to build and `actions/deploy-pages` to publish, and runs on pushes to `main`.
-2. In the repository, open **Settings → Pages** and change **Source** from "Deploy from a branch"
-   (`main` / `/docs`) to **GitHub Actions**.
-3. Merge the workflow to `main`, or run it from the Actions tab, and check https://mjordanic.github.io.
+The repository's **Settings → Pages → Source** must be **GitHub Actions**.
 
 `astro.config.mjs` already sets `site: "https://mjordanic.github.io"`, so canonical URLs, the sitemap and
 `robots.txt` are correct for that address. No `base` path is needed because this is the user site at the
 domain root.
-
-The alternative is to commit a built copy and serve it from a branch folder, but that means rebuilding and
-committing on every change; the Actions route avoids that.

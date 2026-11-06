@@ -148,8 +148,8 @@
         "LangGraph"
       ],
       "repo": "https://github.com/mjordanic/home-energy-planner",
-      "live": null,
-      "liveNote": "Runs locally as a simulation and notebooks; there is no hosted demo.",
+      "live": "https://lamis-technologies.hr/projects/aerogrid/",
+      "liveNote": "An interactive replay of precomputed scenarios, not a live optimiser.",
       "images": [
         {
           "file": "power-cap.png",
