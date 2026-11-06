@@ -36,8 +36,8 @@ npm run preview   # serve dist/ locally
 To update the content, edit the two JSON files. The career chart on the home page is drawn from the
 `experience` and `education` entries (`short` is the label it shows).
 
-The email address is not set yet: `contact.email` is `null`, and the page shows a visible "to be confirmed"
-marker in its place. Set it to the address to show and the marker becomes a `mailto:` link.
+The email shown is `contact.email`. Setting it to `null` replaces the link with a visible "to be confirmed"
+marker.
 
 To regenerate the Open Graph image or the icons after editing the SVGs:
 

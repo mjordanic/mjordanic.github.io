@@ -1,5 +1,5 @@
 ---
-// Profile links plus email. While cv.contact.email is null the email slot shows a
+// Profile links plus email. If cv.contact.email is set to null the email slot shows a
 // visible "to be confirmed" marker instead of a link.
 import cv from "../content/cv.json";
 
@@ -20,7 +20,7 @@ const { email, links } = cv.contact;
     {
       email ? (
         <a class="btn" href={`mailto:${email}`}>
-          Email
+          {email}
         </a>
       ) : (
         <span class="placeholder">Email: address to be confirmed</span>

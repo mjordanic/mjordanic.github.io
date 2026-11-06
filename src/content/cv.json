@@ -209,7 +209,7 @@
     }
   ],
   "contact": {
-    "email": null,
+    "email": "mislav@lamis-technologies.hr",
     "links": [
       {
         "label": "GitHub",
@@ -226,8 +226,7 @@
         "handle": "0000-0001-6831-3327",
         "url": "https://orcid.org/0000-0001-6831-3327"
       }
-    ],
-    "emailPlaceholder": true
+    ]
   },
   "photo": {
     "alt": "Portrait of Mislav Jordanić, smiling, outdoors against a blue sky.",
