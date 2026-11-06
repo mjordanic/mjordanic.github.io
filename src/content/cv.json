@@ -1,0 +1,241 @@
+{
+  "$comment": "All CV content for the site. Pages render this file; edit it (not the layouts) to update the site.",
+  "profile": {
+    "name": "Mislav Jordanić",
+    "shortName": "Mislav",
+    "title": "Data scientist",
+    "credential": "PhD, Biomedical Engineering",
+    "location": "Zagreb, Croatia",
+    "summary": [
+      "I am a data scientist with a background in biomedical engineering and more than ten years of work with data and models. Most of my recent work has been demand forecasting, prediction, and inventory and price optimisation for clients, including combining LLM-based agents with classical models.",
+      "Before moving to industry I spent seven years as a researcher and lecturer at the Universitat Politècnica de Catalunya, working with biomedical signals, mainly high-density EMG: recording muscle activity and using it to identify movements and estimate force, for rehabilitation and human-machine interfaces.",
+      "Since 2025 I have been working as a data scientist at Lamis Technologies in Zagreb."
+    ],
+    "currentRole": "Data scientist at Lamis Technologies"
+  },
+  "experience": [
+    {
+      "role": "Data scientist",
+      "organisation": "Lamis Technologies",
+      "location": "Zagreb, Croatia",
+      "start": "2025",
+      "end": "present",
+      "summary": "Data science and machine learning work for clients: forecasting, prediction and optimisation.",
+      "highlights": [],
+      "short": "Lamis Technologies"
+    },
+    {
+      "role": "Machine Learning Scientist",
+      "organisation": "Pendulum Systems",
+      "location": "Washington, DC, USA",
+      "start": "2022",
+      "end": "2025",
+      "summary": "Demand forecasting and inventory optimisation for clients in several regions.",
+      "highlights": [
+        "Built forecasting models for client data that was often sparse or noisy.",
+        "Set up model evaluation, tracking and explainability reporting so planners could see why a forecast moved.",
+        "Worked on price and inventory planning with constrained optimisation.",
+        "Worked on simulation for supply chain and inventory planning.",
+        "Contributed to an internal Python library for demand forecasting.",
+        "Combined LLM agents with classical forecasting models, and developed ways to evaluate the stability of the combined system.",
+        "Built an LLM-based data ingestion flow that reduced manual data preparation.",
+        "Worked on delivery-time and location estimation from traffic and route data."
+      ],
+      "short": "Pendulum Systems"
+    },
+    {
+      "role": "Data Scientist / Quantitative Researcher",
+      "organisation": "Aprawa",
+      "location": "Cheyenne, WY, USA",
+      "start": "2021",
+      "end": "2022",
+      "summary": "Trading strategies built on gradient-boosted trees (CatBoost, XGBoost) and sequence models (Keras).",
+      "highlights": [],
+      "short": "Aprawa"
+    },
+    {
+      "role": "Researcher and Lecturer, Biomedical Engineering",
+      "organisation": "Universitat Politècnica de Catalunya (UPC)",
+      "location": "Barcelona, Spain",
+      "start": "2014",
+      "end": "2021",
+      "summary": "Acquisition and analysis of biomedical signals (EMG, ECG, EEG, EOG, IMU, force), with a focus on predicting limb force and motor tasks from muscle activity.",
+      "highlights": [
+        "Took part in five research projects and led the technical side of three innovation projects, including a 256-channel wireless EMG amplifier.",
+        "Took a technology-transfer project through international healthcare accelerator programmes."
+      ],
+      "short": "UPC"
+    }
+  ],
+  "education": [
+    {
+      "degree": "Postgraduate specialisation in Data Science and Big Data",
+      "institution": "Universitat de Barcelona",
+      "location": "Barcelona, Spain",
+      "year": "2019",
+      "short": "Data science"
+    },
+    {
+      "degree": "PhD in Biomedical Engineering",
+      "institution": "Universitat Politècnica de Catalunya",
+      "location": "Barcelona, Spain",
+      "year": "2017",
+      "note": "Thesis on muscle activity patterns from multichannel surface EMG; supervised by Miguel Ángel Mañanas and Mónica Rojas-Martínez.",
+      "short": "PhD"
+    },
+    {
+      "degree": "MSc in Electronic and Computer Engineering",
+      "institution": "University of Zagreb, Faculty of Electrical Engineering and Computing",
+      "location": "Zagreb, Croatia",
+      "year": "2012",
+      "short": "MSc"
+    }
+  ],
+  "skills": [
+    {
+      "group": "Modelling",
+      "items": [
+        "Forecasting and time series",
+        "Gradient-boosted trees (LightGBM, XGBoost, CatBoost)",
+        "Deep learning (PyTorch, Keras)",
+        "Reinforcement learning (PPO)",
+        "Statistical methods"
+      ]
+    },
+    {
+      "group": "Optimisation and simulation",
+      "items": [
+        "Constrained optimisation (cvxpy, MOSEK)",
+        "Hyperparameter search (Optuna)",
+        "Discrete-event and agent simulation",
+        "Inventory policies"
+      ]
+    },
+    {
+      "group": "LLMs and agents",
+      "items": [
+        "LangGraph",
+        "Retrieval-augmented generation",
+        "OpenAI and Anthropic APIs",
+        "Evaluating LLM-assisted systems"
+      ]
+    },
+    {
+      "group": "Signals and data",
+      "items": [
+        "Digital signal processing",
+        "EMG, IMU and other biosignals",
+        "SQL",
+        "Geospatial data (GeoPandas, OpenStreetMap, Valhalla)"
+      ]
+    },
+    {
+      "group": "Engineering",
+      "items": [
+        "Python, C, MATLAB",
+        "pytest, git",
+        "MLflow, ClearML",
+        "AWS (SageMaker, Lambda, EC2, S3, ECS), Google Cloud Run",
+        "Docker"
+      ]
+    }
+  ],
+  "publicationProfiles": [
+    {
+      "label": "ORCID",
+      "url": "https://orcid.org/0000-0001-6831-3327"
+    },
+    {
+      "label": "OpenAlex",
+      "url": "https://openalex.org/A5059697582"
+    }
+  ],
+  "publications": [
+    {
+      "type": "Journal article",
+      "title": "Kernel density estimation of electromyographic signals and ensemble learning for highly accurate classification of a large set of hand/wrist motions",
+      "authors": "P. Ghaderi, M. Nosouhi, M. Jordanić, H. R. Marateb, M. A. Mañanas, D. Farina",
+      "venue": "Frontiers in Neuroscience 16:796711",
+      "year": 2022,
+      "url": "https://doi.org/10.3389/fnins.2022.796711"
+    },
+    {
+      "type": "Journal article",
+      "title": "High-density surface electromyography signals during isometric contractions of elbow muscles of healthy humans",
+      "authors": "M. Rojas-Martínez, L. Y. Serna, M. Jordanić, H. R. Marateb, R. Merletti, M. Á. Mañanas",
+      "venue": "Scientific Data 7:397",
+      "year": 2020,
+      "url": "https://doi.org/10.1038/s41597-020-00717-6"
+    },
+    {
+      "type": "Journal article",
+      "title": "Analysis of muscle load-sharing in patients with lateral epicondylitis during endurance isokinetic contractions using non-linear prediction",
+      "authors": "M. Rojas-Martínez, J. F. Alonso, M. Jordanić, M. Á. Mañanas, J. Chaler",
+      "venue": "Frontiers in Physiology 10:1185",
+      "year": 2019,
+      "url": "https://doi.org/10.3389/fphys.2019.01185"
+    },
+    {
+      "type": "Journal article",
+      "title": "A novel spatial feature for the identification of motor tasks using high-density electromyography",
+      "authors": "M. Jordanić, M. Rojas-Martínez, M. A. Mañanas, J. F. Alonso, H. R. Marateb",
+      "venue": "Sensors 17(7):1597",
+      "year": 2017,
+      "url": "https://doi.org/10.3390/s17071597"
+    },
+    {
+      "type": "Journal article",
+      "title": "Identificación de tareas isométricas y dinámicas del miembro superior basada en EMG de alta densidad",
+      "authors": "M. Rojas-Martínez, J. F. Alonso, M. Jordanić, S. Romero, M. A. Mañanas",
+      "venue": "Revista Iberoamericana de Automática e Informática Industrial 14(4):406–411",
+      "year": 2017,
+      "url": "https://doi.org/10.1016/j.riai.2017.07.006"
+    },
+    {
+      "type": "Journal article",
+      "title": "Spatial distribution of HD-EMG improves identification of task and force in patients with incomplete spinal cord injury",
+      "authors": "M. Jordanić, M. Rojas-Martínez, M. A. Mañanas, J. F. Alonso",
+      "venue": "Journal of NeuroEngineering and Rehabilitation 13:41",
+      "year": 2016,
+      "url": "https://doi.org/10.1186/s12984-016-0151-8"
+    },
+    {
+      "type": "Journal article",
+      "title": "Prediction of isometric motor tasks and effort levels based on high-density EMG in patients with incomplete spinal cord injury",
+      "authors": "M. Jordanić, M. Rojas-Martínez, M. A. Mañanas, J. F. Alonso",
+      "venue": "Journal of Neural Engineering 13(4):046002",
+      "year": 2016,
+      "url": "https://doi.org/10.1088/1741-2560/13/4/046002"
+    }
+  ],
+  "contact": {
+    "email": "mislav@lamis-technologies.hr",
+    "links": [
+      {
+        "label": "GitHub",
+        "handle": "github.com/mjordanic",
+        "url": "https://github.com/mjordanic"
+      },
+      {
+        "label": "LinkedIn",
+        "handle": "linkedin.com/in/mislav-jordanic",
+        "url": "https://www.linkedin.com/in/mislav-jordanic-85848443/"
+      },
+      {
+        "label": "ORCID",
+        "handle": "0000-0001-6831-3327",
+        "url": "https://orcid.org/0000-0001-6831-3327"
+      }
+    ]
+  },
+  "photo": {
+    "alt": "Portrait of Mislav Jordanić, smiling, outdoors against a blue sky.",
+    "width": 560,
+    "height": 700,
+    "sources": {
+      "avif": "/images/portrait-320.avif 320w, /images/portrait-560.avif 560w",
+      "webp": "/images/portrait-320.webp 320w, /images/portrait-560.webp 560w"
+    },
+    "src": "/images/portrait-560.webp"
+  }
+}

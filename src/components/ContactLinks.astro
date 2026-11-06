@@ -1,0 +1,38 @@
+---
+// Profile links plus email. If cv.contact.email is set to null the email slot shows a
+// visible "to be confirmed" marker instead of a link.
+import cv from "../content/cv.json";
+
+const { email, links } = cv.contact;
+---
+
+<ul class="btn-row contact" aria-label="Contact and profiles">
+  {
+    links.map((l, i) => (
+      <li>
+        <a class:list={["btn", { "btn-primary": i === 0 }]} href={l.url}>
+          {l.label} <span aria-hidden="true">↗</span>
+        </a>
+      </li>
+    ))
+  }
+  <li>
+    {
+      email ? (
+        <a class="btn" href={`mailto:${email}`}>
+          {email}
+        </a>
+      ) : (
+        <span class="placeholder">Email: address to be confirmed</span>
+      )
+    }
+  </li>
+</ul>
+
+<style>
+  .contact {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+</style>

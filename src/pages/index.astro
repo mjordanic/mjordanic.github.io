@@ -1,0 +1,414 @@
+---
+import Base from "../layouts/Base.astro";
+import ContactLinks from "../components/ContactLinks.astro";
+import Timeline from "../components/Timeline.astro";
+import cv from "../content/cv.json";
+import data from "../content/projects.json";
+
+const { profile, experience, education, skills, publications, publicationProfiles } = cv;
+const pubs = publications.filter((p) => p.type === "Journal article").sort((a, b) => b.year - a.year);
+const github = cv.contact.links.find((l) => l.label === "GitHub")!;
+const doiOf = (url: string) => new URL(url).pathname.slice(1);
+// Highlight the site owner's name in author lists.
+const authorParts = (authors: string) => authors.split(/(M\. Jordanić)/);
+---
+
+<Base
+  description={`${profile.name}, ${profile.title.toLowerCase()} at ${experience[0].organisation} in ${profile.location}. CV with experience in forecasting and optimisation, biomedical engineering research, publications and projects.`}
+>
+  <div class="wrap">
+    <section class="hero" aria-labelledby="name-h">
+      <div class="hero-text">
+        <h1 id="name-h">{profile.name}</h1>
+        <p class="role">
+          {profile.currentRole}<span class="sep" aria-hidden="true"> · </span><span class="nowrap">{profile.location}</span>
+        </p>
+        <p class="credential muted">{profile.credential}</p>
+        <ContactLinks />
+      </div>
+      <div class="photo">
+        <picture>
+          <source type="image/avif" srcset={cv.photo.sources.avif} sizes="(max-width: 48rem) 9rem, 13rem" />
+          <source type="image/webp" srcset={cv.photo.sources.webp} sizes="(max-width: 48rem) 9rem, 13rem" />
+          <img
+            src={cv.photo.src}
+            alt={cv.photo.alt}
+            width={cv.photo.width}
+            height={cv.photo.height}
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </picture>
+      </div>
+    </section>
+
+    <section class="cv-section" id="about" aria-labelledby="about-h">
+      <h2 id="about-h">About</h2>
+      <div>
+        <div class="summary">
+          {profile.summary.map((p) => <p>{p}</p>)}
+        </div>
+        <Timeline />
+      </div>
+    </section>
+
+    <section class="cv-section" id="experience" aria-labelledby="exp-h">
+      <h2 id="exp-h">Experience</h2>
+      <div>
+        <ol class="entries">
+          {
+            experience.map((e) => (
+              <li class="entry">
+                <div class="entry-head">
+                  <h3>{e.role}</h3>
+                  <span class="when label tabular">
+                    {e.start}–{e.end}
+                  </span>
+                </div>
+                <p class="org">
+                  {e.organisation} <span class="muted">· {e.location}</span>
+                </p>
+                <p>{e.summary}</p>
+                {e.highlights.length > 0 && (
+                  <ul class="highlights">
+                    {e.highlights.map((h) => (
+                      <li>{h}</li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section class="cv-section" id="education" aria-labelledby="edu-h">
+      <h2 id="edu-h">Education</h2>
+      <div>
+        <ol class="entries">
+          {
+            education.map((e) => (
+              <li class="entry">
+                <div class="entry-head">
+                  <h3>{e.degree}</h3>
+                  <span class="when label tabular">{e.year}</span>
+                </div>
+                <p class="org">
+                  {e.institution} <span class="muted">· {e.location}</span>
+                </p>
+                {e.note && <p class="muted">{e.note}</p>}
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section class="cv-section" id="skills" aria-labelledby="skills-h">
+      <h2 id="skills-h">Skills</h2>
+      <div>
+        <dl class="skills">
+          {
+            skills.map((s) => (
+              <div class="skill">
+                <dt class="label">{s.group}</dt>
+                <dd>
+                  <ul class="tags">
+                    {s.items.map((i) => (
+                      <li class="tag">{i}</li>
+                    ))}
+                  </ul>
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </section>
+
+    <section class="cv-section" id="publications" aria-labelledby="pub-h">
+      <h2 id="pub-h">Publications</h2>
+      <div>
+        <p class="muted">
+          Journal articles from my research in biomedical engineering, mostly on high-density EMG. Also on{" "}
+          {
+            publicationProfiles.map((p, i) => (
+              <>
+                {i > 0 && " and "}
+                <a href={p.url}>{p.label}</a>
+              </>
+            ))
+          }.
+        </p>
+        <ol class="pubs">
+          {
+            pubs.map((p) => (
+              <li>
+                <span class="pub-year label tabular">{p.year}</span>
+                <div>
+                  <a class="pub-title" href={p.url}>
+                    {p.title}
+                  </a>
+                  <p class="pub-meta">
+                    {authorParts(p.authors).map((part) => (part === "M. Jordanić" ? <strong>{part}</strong> : part))}.{" "}
+                    <em>{p.venue}</em>. <span class="doi">doi:{doiOf(p.url)}</span>
+                  </p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section class="cv-section" id="projects" aria-labelledby="proj-h">
+      <h2 id="proj-h">Projects</h2>
+      <div>
+        <p class="muted">
+          Personal projects I build to try out ideas end to end, from data to a small working interface. The code for each
+          is on GitHub; <a href="/projects/">the projects page</a> has screenshots and more detail.
+        </p>
+        <ul class="project-list">
+          {
+            data.projects.map((p) => (
+              <li class="project-card">
+                <p class="label">{p.kicker}</p>
+                <h3>
+                  <a href={`/projects/#${p.slug}`}>{p.name}</a>
+                </h3>
+                <p>{p.summary}</p>
+                <p class="project-links">
+                  {p.live && (
+                    <a href={p.live}>
+                      Live demo <span aria-hidden="true">↗</span>
+                    </a>
+                  )}
+                  <a href={p.repo}>
+                    Code <span aria-hidden="true">↗</span>
+                  </a>
+                </p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="github" aria-labelledby="gh-h">
+      <div>
+        <h2 id="gh-h">Code on GitHub</h2>
+        <p class="muted">The source for these projects and other experiments is on my GitHub profile.</p>
+      </div>
+      <a class="btn btn-primary gh-btn" href={github.url}>
+        github.com/mjordanic <span aria-hidden="true">↗</span>
+      </a>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 13rem;
+    gap: var(--space-8);
+    align-items: center;
+    padding-block: var(--space-16) var(--space-12);
+  }
+  .hero h1 {
+    margin-bottom: var(--space-3);
+  }
+  .role {
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-1);
+  }
+  .credential {
+    margin-bottom: var(--space-6);
+  }
+  .nowrap {
+    white-space: nowrap;
+  }
+  .photo img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+  }
+  .summary {
+    max-width: 42rem;
+    margin-bottom: var(--space-8);
+  }
+  .entries {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .entry + .entry {
+    margin-top: var(--space-8);
+  }
+  .entry-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0 var(--space-4);
+  }
+  .entry-head h3 {
+    margin-bottom: var(--space-1);
+  }
+  .when {
+    color: var(--accent);
+  }
+  .org {
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+  }
+  .org .muted {
+    font-weight: 400;
+  }
+  .entry p:last-child {
+    margin-bottom: 0;
+  }
+  .highlights {
+    margin: 0;
+    color: var(--ink-muted);
+  }
+  .highlights li + li {
+    margin-top: var(--space-1);
+  }
+  .skills {
+    display: grid;
+    gap: var(--space-6);
+    margin: 0;
+  }
+  .skill dt {
+    margin-bottom: var(--space-2);
+  }
+  .skill dd {
+    margin: 0;
+  }
+  .pubs {
+    list-style: none;
+    margin: var(--space-6) 0 0;
+    padding: 0;
+  }
+  .pubs > li {
+    display: grid;
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+    gap: var(--space-4);
+    padding-block: var(--space-4);
+    border-top: 1px solid var(--line);
+  }
+  .pub-year {
+    padding-top: 0.2rem;
+    color: var(--accent);
+  }
+  .pub-title {
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--ink);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+  .pub-title:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  .pub-meta {
+    margin: var(--space-1) 0 0;
+    font-size: var(--text-sm);
+    color: var(--ink-muted);
+    overflow-wrap: anywhere;
+  }
+  .pub-meta strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .doi {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+  }
+  .project-list {
+    list-style: none;
+    margin: var(--space-6) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+    gap: var(--space-4);
+  }
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: var(--space-6);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--accent);
+    border-radius: var(--radius);
+  }
+  .project-card .label {
+    margin-bottom: var(--space-2);
+  }
+  .project-card h3 a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .project-card h3 a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  .project-card p {
+    font-size: var(--text-sm);
+  }
+  .project-links {
+    display: flex;
+    gap: var(--space-4);
+    margin: auto 0 0;
+    padding-top: var(--space-2);
+    font-weight: 600;
+  }
+  .github {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    padding: var(--space-8);
+    background: var(--accent-soft);
+    border-radius: var(--radius);
+  }
+  .github h2 {
+    margin-bottom: var(--space-1);
+  }
+  .github p {
+    margin: 0;
+  }
+  .gh-btn {
+    font-size: var(--text-base);
+    min-height: 3rem;
+    padding-inline: var(--space-6);
+  }
+  @media (max-width: 48rem) {
+    .hero {
+      grid-template-columns: minmax(0, 1fr);
+      padding-block: var(--space-8);
+    }
+    .photo {
+      order: -1;
+      width: 9rem;
+    }
+    .pubs > li {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+    }
+    .pub-title {
+      font-size: var(--text-base);
+    }
+  }
+</style>

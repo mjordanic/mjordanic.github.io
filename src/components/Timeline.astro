@@ -1,0 +1,218 @@
+---
+// Career at a glance: a small static chart of the experience and education entries
+// in cv.json, drawn with HTML and CSS (no JS). Each bar and marker carries its text
+// for screen readers; the full details follow in the sections below it.
+import cv from "../content/cv.json";
+
+const now = new Date().getFullYear();
+const toYear = (v: string) => (v === "present" ? now + 1 : Number(v));
+const starts = [...cv.experience.map((e) => Number(e.start)), ...cv.education.map((e) => Number(e.year))];
+const min = Math.min(...starts);
+const max = now + 1;
+const pos = (y: number) => ((y - min) / (max - min)) * 100;
+
+const ticks: number[] = [];
+for (let y = min; y <= now; y += 2) ticks.push(y);
+
+const bars = cv.experience.map((e) => ({
+  label: e.short,
+  range: `${e.start}–${e.end}`,
+  spoken: `${e.organisation}, ${e.role}: ${e.start} to ${e.end}`,
+  left: pos(Number(e.start)),
+  width: pos(toYear(e.end)) - pos(Number(e.start)),
+  open: e.end === "present",
+}));
+const degrees = [...cv.education]
+  .sort((a, b) => Number(a.year) - Number(b.year))
+  .map((e) => ({ label: e.short, year: e.year, spoken: `${e.degree}, ${e.year}`, left: pos(Number(e.year)) }));
+---
+
+<figure class="timeline" aria-labelledby="timeline-cap" style={`--span:${(max - min) / 2}`}>
+  <figcaption id="timeline-cap" class="label">Career at a glance, {min}–{now}</figcaption>
+  <ol class="rows">
+    {
+      bars.map((b) => (
+        <li class="row">
+          <span class="row-label" aria-hidden="true">
+            {b.label}
+          </span>
+          <span class="track">
+            <span class:list={["bar", { open: b.open }]} style={`left:${b.left}%;width:${b.width}%`}>
+              <span class="sr-only">{b.spoken}</span>
+            </span>
+            <span class="range tabular" aria-hidden="true" style={b.left > 80 ? "right:0" : `left:${b.left}%`}>
+              {b.range}
+            </span>
+          </span>
+        </li>
+      ))
+    }
+    <li class="row degrees">
+      <span class="row-label" aria-hidden="true">Degrees</span>
+      <span class="track">
+        {
+          degrees.map((d, i) => (
+            <span
+              class:list={["marker", i % 2 ? "below" : "above", { start: d.left < 8, end: d.left > 92 }]}
+              style={`left:${d.left}%`}
+            >
+              <span class="sr-only">{d.spoken}</span>
+              <span class="marker-text" aria-hidden="true">
+                {d.label} <span class="tabular">{d.year}</span>
+              </span>
+            </span>
+          ))
+        }
+      </span>
+    </li>
+  </ol>
+  <div class="axis" aria-hidden="true">
+    <span class="row-label"></span>
+    <span class="track">
+      {
+        ticks.map((t) => (
+          <span class="tick tabular" style={`left:${pos(t)}%`}>
+            {t}
+          </span>
+        ))
+      }
+    </span>
+  </div>
+</figure>
+
+<style>
+  .timeline {
+    margin: 0;
+    padding: var(--space-6);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+  figcaption {
+    margin-bottom: var(--space-4);
+  }
+  .rows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .row,
+  .axis {
+    display: grid;
+    grid-template-columns: 9.5rem minmax(0, 1fr);
+    gap: var(--space-4);
+    align-items: center;
+  }
+  .row {
+    min-height: 2.6rem;
+  }
+  .row-label {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    min-width: 0;
+  }
+  .track {
+    position: relative;
+    display: block;
+    height: 2.2rem;
+    min-width: 0;
+    /* Vertical grid lines every two years, like a plot background. */
+    background-image: linear-gradient(to right, var(--line) 1px, transparent 1px);
+    background-size: calc(100% / var(--span, 7)) 100%;
+  }
+  .bar {
+    position: absolute;
+    top: 0.3rem;
+    height: 0.75rem;
+    min-width: 0.5rem;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .bar.open {
+    background: linear-gradient(to right, var(--accent) 70%, color-mix(in srgb, var(--accent) 25%, transparent));
+  }
+  .range {
+    position: absolute;
+    top: 1.15rem;
+    font-size: var(--text-xs);
+    color: var(--ink-muted);
+    white-space: nowrap;
+  }
+  .degrees .track {
+    height: 3.4rem;
+  }
+  .marker {
+    position: absolute;
+    top: 50%;
+    width: 0;
+    height: 0;
+  }
+  .marker::before {
+    content: "";
+    position: absolute;
+    left: -0.35rem;
+    top: -0.35rem;
+    width: 0.7rem;
+    height: 0.7rem;
+    background: var(--accent-2);
+    transform: rotate(45deg);
+  }
+  .marker-text {
+    position: absolute;
+    left: 0;
+    transform: translateX(-50%);
+    font-size: var(--text-xs);
+    color: var(--ink-muted);
+    white-space: nowrap;
+  }
+  .marker.start .marker-text {
+    transform: translateX(-0.35rem);
+  }
+  .marker.end .marker-text {
+    transform: translateX(calc(-100% + 0.35rem));
+  }
+  .marker.above .marker-text {
+    bottom: 0.6rem;
+  }
+  .marker.below .marker-text {
+    top: 0.6rem;
+  }
+  .axis {
+    border-top: 1px solid var(--line-strong);
+    padding-top: var(--space-1);
+  }
+  .axis .track {
+    height: 1.4rem;
+    background: none;
+  }
+  .tick {
+    position: absolute;
+    transform: translateX(-50%);
+    font-size: var(--text-xs);
+    color: var(--ink-muted);
+  }
+  .tick::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -0.3rem;
+    height: 0.3rem;
+    border-left: 1px solid var(--line-strong);
+  }
+  @media (max-width: 40rem) {
+    .timeline {
+      padding: var(--space-4);
+    }
+    .row,
+    .axis {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+    }
+    .row {
+      padding-top: var(--space-2);
+    }
+    .tick:nth-child(even) {
+      display: none;
+    }
+  }
+</style>
