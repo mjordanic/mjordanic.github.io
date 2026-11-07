@@ -132,11 +132,11 @@
     {
       "slug": "aerogrid",
       "name": "AeroGrid",
-      "kicker": "Optimisation · LLM agents · simulation",
+      "kicker": "Optimisation · LangGraph · simulation",
       "summary": "A research demo that schedules household electricity use against real wholesale prices. It moves flexible loads, such as an EV charger, a hot-water heater, a dishwasher and a washing machine, into cheaper 15-minute slots and can charge and discharge a home battery, while the always-on base load stays as it is.",
       "details": [
         "A receding-horizon linear program, with a small mixed-integer step for appliance cycles, solved with HiGHS through CVXPY. Energy deadlines are soft constraints, so the solver always returns a plan.",
-        "The optimiser runs inside a LangGraph loop. Replans are triggered by a new appliance start, a price surprise or a slipping EV deadline, and there is an approval step before a cycle is moved.",
+        "The optimiser runs inside a LangGraph loop. Replans are triggered by a new appliance start, a price surprise or a slipping EV deadline. A person stays in the loop: before moving a dishwasher or washing-machine start, the planner asks the user to accept the later, cheaper start or run the cycle now. In the recorded runs and the replay these answers are scripted, not given by a real person.",
         "A digital twin replays real SMARD day-ahead prices for Germany and Luxembourg and runs a baseline and two optimiser strategies on the same inputs, so their costs can be compared.",
         "It is a demo rather than production software; the known gaps are listed in the README."
       ],
