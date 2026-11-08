@@ -18,19 +18,35 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL("/og.png", Astro.site);
 
 // Structured data so search engines can link this page to the person and profiles.
+const lamisUrl = cv.experience[0].url;
 const person = {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": new URL("/#person", Astro.site).href,
   name: profile.name,
+  alternateName: [profile.nameAscii, "M. Jordanić", "M. Jordanic"],
+  givenName: profile.shortName,
+  familyName: profile.name.replace(`${profile.shortName} `, ""),
   url: Astro.site?.href,
+  image: new URL(cv.photo.src, Astro.site).href,
   jobTitle: profile.title,
-  worksFor: { "@type": "Organization", name: cv.experience[0].organisation },
+  worksFor: {
+    "@type": "Organization",
+    "@id": `${lamisUrl}#org`,
+    name: cv.experience[0].organisation,
+    url: lamisUrl,
+  },
   address: { "@type": "PostalAddress", addressLocality: "Zagreb", addressCountry: "HR" },
   alumniOf: [...new Set(cv.education.map((e) => e.institution))].map((name) => ({
     "@type": "CollegeOrUniversity",
     name,
   })),
-  sameAs: cv.contact.links.map((l) => l.url),
+  // Profiles plus the matching Lamis team page, deduplicated (ORCID is in both lists).
+  sameAs: [
+    ...cv.contact.links.map((l) => l.url),
+    ...cv.publicationProfiles.map((p) => p.url),
+    `${lamisUrl}team/`,
+  ].filter((u, i, all) => all.indexOf(u) === i),
 };
 ---
 
@@ -41,6 +57,7 @@ const person = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <meta name="author" content={profile.name} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
     <meta name="color-scheme" content="light dark" />

@@ -15,7 +15,7 @@ const authorParts = (authors: string) => authors.split(/(M\. Jordanić)/);
 ---
 
 <Base
-  description={`${profile.name}, ${profile.title.toLowerCase()} at ${experience[0].organisation} in ${profile.location}. CV with experience in forecasting and optimisation, biomedical engineering research, publications and projects.`}
+  description={`${profile.name}, ${profile.title.toLowerCase()} at ${experience[0].organisation} in ${profile.location}. CV with experience in forecasting and optimisation, biomedical engineering research, publications and projects. Also written ${profile.nameAscii}.`}
 >
   <div class="wrap">
     <section class="hero" aria-labelledby="name-h">
@@ -24,7 +24,9 @@ const authorParts = (authors: string) => authors.split(/(M\. Jordanić)/);
         <p class="role">
           {profile.currentRole}<span class="sep" aria-hidden="true"> · </span><span class="nowrap">{profile.location}</span>
         </p>
-        <p class="credential muted">{profile.credential}</p>
+        <p class="credential muted">
+          {profile.credential}<span class="sep" aria-hidden="true"> · </span>also written {profile.nameAscii}
+        </p>
         <ContactLinks />
       </div>
       <div class="photo">
@@ -68,7 +70,8 @@ const authorParts = (authors: string) => authors.split(/(M\. Jordanić)/);
                   </span>
                 </div>
                 <p class="org">
-                  {e.organisation} <span class="muted">· {e.location}</span>
+                  {e.url ? <a href={e.url}>{e.organisation}</a> : e.organisation}{" "}
+                  <span class="muted">· {e.location}</span>
                 </p>
                 <p>{e.summary}</p>
                 {e.highlights.length > 0 && (
