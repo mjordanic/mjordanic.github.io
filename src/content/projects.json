@@ -105,7 +105,12 @@
       "repo": "https://github.com/mjordanic/krovlab",
       "live": "https://krovlab.lamis-technologies.hr",
       "liveNote": "The server sleeps when idle, so the first load can take a few seconds.",
-      "posts": [],
+      "posts": [
+        {
+          "title": "Let the Walls Rise: How a Roof Draws Itself From a Floor Plan",
+          "url": "https://lamis-technologies.hr/blog/krovlab-roof-geometry/"
+        }
+      ],
       "images": [
         {
           "file": "roof-plan.png",
