@@ -2,6 +2,7 @@
   "$comment": "All CV content for the site. Pages render this file; edit it (not the layouts) to update the site.",
   "profile": {
     "name": "Mislav Jordanić",
+    "nameAscii": "Mislav Jordanic",
     "shortName": "Mislav",
     "title": "Data scientist",
     "credential": "PhD, Biomedical Engineering",
@@ -17,6 +18,7 @@
     {
       "role": "Data scientist",
       "organisation": "Lamis Technologies",
+      "url": "https://lamis-technologies.hr/",
       "location": "Zagreb, Croatia",
       "start": "2025",
       "end": "present",
