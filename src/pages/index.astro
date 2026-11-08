@@ -8,6 +8,7 @@ import data from "../content/projects.json";
 const { profile, experience, education, skills, publications, publicationProfiles } = cv;
 const pubs = publications.filter((p) => p.type === "Journal article").sort((a, b) => b.year - a.year);
 const github = cv.contact.links.find((l) => l.label === "GitHub")!;
+const blogPosts = data.projects.flatMap((p) => p.posts.map((post) => ({ ...post, project: p.name, slug: p.slug })));
 const doiOf = (url: string) => new URL(url).pathname.slice(1);
 // Highlight the site owner's name in author lists.
 const authorParts = (authors: string) => authors.split(/(M\. Jordanić)/);
@@ -160,6 +161,25 @@ const authorParts = (authors: string) => authors.split(/(M\. Jordanić)/);
             ))
           }
         </ol>
+        <h3 class="pub-group">Blog posts</h3>
+        <p class="muted">Write-ups of my personal projects, published on the Lamis Technologies blog.</p>
+        <ol class="pubs">
+          {
+            blogPosts.map((post) => (
+              <li>
+                <span class="pub-year label">Blog</span>
+                <div>
+                  <a class="pub-title" href={post.url}>
+                    {post.title}
+                  </a>
+                  <p class="pub-meta">
+                    About <a href={`/projects/#${post.slug}`}>{post.project}</a>.
+                  </p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
       </div>
     </section>
 
@@ -179,6 +199,15 @@ const authorParts = (authors: string) => authors.split(/(M\. Jordanić)/);
                   <a href={`/projects/#${p.slug}`}>{p.name}</a>
                 </h3>
                 <p>{p.summary}</p>
+                {p.posts.length > 0 && (
+                  <ul class="card-posts" aria-label={`Blog posts about ${p.name}`}>
+                    {p.posts.map((post) => (
+                      <li>
+                        <a href={post.url}>{post.title}</a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
                 <p class="project-links">
                   {p.live && (
                     <a href={p.live}>
@@ -330,6 +359,9 @@ const authorParts = (authors: string) => authors.split(/(M\. Jordanić)/);
     color: var(--ink);
     font-weight: 600;
   }
+  .pub-group {
+    margin-top: var(--space-12);
+  }
   .doi {
     font-family: var(--font-mono);
     font-size: var(--text-xs);
@@ -365,6 +397,14 @@ const authorParts = (authors: string) => authors.split(/(M\. Jordanić)/);
   }
   .project-card p {
     font-size: var(--text-sm);
+  }
+  .card-posts {
+    margin: 0 0 var(--space-4);
+    padding-left: 1.1rem;
+    font-size: var(--text-sm);
+  }
+  .card-posts li + li {
+    margin-top: var(--space-1);
   }
   .project-links {
     display: flex;
