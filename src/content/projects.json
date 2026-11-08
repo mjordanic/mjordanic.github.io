@@ -1,5 +1,5 @@
 {
-  "$comment": "Projects data. Images live in src/assets/projects/<slug>/ and are referenced by file name. Set live to null when a project has no verified deployment.",
+  "$comment": "Projects data. Images live in src/assets/projects/<slug>/ and are referenced by file name. Set live to null when a project has no verified deployment. posts lists blog write-ups on the Lamis Technologies blog; they also appear under Publications on the home page.",
   "projects": [
     {
       "slug": "hikesalike",
@@ -23,6 +23,12 @@
       "repo": "https://github.com/mjordanic/outdoors_destinations",
       "live": "https://hikesalike.com",
       "liveNote": "The server sleeps when idle, so the first load can take around 20 seconds.",
+      "posts": [
+        {
+          "title": "What Makes Two Hikes Alike? Calibrating 27 Similarity Measures",
+          "url": "https://lamis-technologies.hr/blog/hikesalike-similarity/"
+        }
+      ],
       "images": [
         {
           "file": "seed-hike.png",
@@ -57,6 +63,16 @@
       "repo": "https://github.com/mjordanic/supply_chain_simulator",
       "live": "https://supplychain.lamis-technologies.hr",
       "liveNote": "A limited slice of the simulator. It may take a few seconds to wake up.",
+      "posts": [
+        {
+          "title": "Two Identical Shops, $673 Apart: How a Shared Supplier Splits Their Fortunes",
+          "url": "https://lamis-technologies.hr/blog/supply-chain-simulator/"
+        },
+        {
+          "title": "Is It Luck? Paired Random Worlds for Comparing Inventory Policies",
+          "url": "https://lamis-technologies.hr/blog/supply-chain-paired-worlds/"
+        }
+      ],
       "images": [
         {
           "file": "policy-lab.png",
@@ -89,6 +105,7 @@
       "repo": "https://github.com/mjordanic/krovlab",
       "live": "https://krovlab.lamis-technologies.hr",
       "liveNote": "The server sleeps when idle, so the first load can take a few seconds.",
+      "posts": [],
       "images": [
         {
           "file": "roof-plan.png",
@@ -122,6 +139,7 @@
       "repo": "https://github.com/mjordanic/CV_editor",
       "live": null,
       "liveNote": "Runs locally from the command line; there is no hosted demo.",
+      "posts": [],
       "images": [
         {
           "file": "workflow-graph.png",
@@ -150,6 +168,16 @@
       "repo": "https://github.com/mjordanic/home-energy-planner",
       "live": "https://lamis-technologies.hr/projects/aerogrid/",
       "liveNote": "An interactive replay of precomputed scenarios, not a live optimiser.",
+      "posts": [
+        {
+          "title": "Three bills for one house: what German spot prices say about shifting loads and a home battery",
+          "url": "https://lamis-technologies.hr/blog/aerogrid-three-bills/"
+        },
+        {
+          "title": "A home-energy optimiser that never says \"infeasible\"",
+          "url": "https://lamis-technologies.hr/blog/aerogrid-never-infeasible/"
+        }
+      ],
       "images": [
         {
           "file": "power-cap.png",

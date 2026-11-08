@@ -66,6 +66,20 @@ const names = data.projects.map((p) => p.name);
               </a>
             </div>
             {p.liveNote && <p class="note muted">{p.liveNote}</p>}
+            {p.posts.length > 0 && (
+              <div class="posts">
+                <h3 class="label">Blog {p.posts.length === 1 ? "post" : "posts"}</h3>
+                <ul>
+                  {p.posts.map((post) => (
+                    <li>
+                      <a href={post.url}>
+                        {post.title} <span aria-hidden="true">↗</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
             <div class:list={["figures", { single: p.images.length === 1 }]}>
               {p.images.map((img, j) => (
                 <figure>
@@ -127,6 +141,20 @@ const names = data.projects.map((p) => p.name);
   .note {
     margin: var(--space-3) 0 0;
     font-size: var(--text-sm);
+  }
+  .posts {
+    max-width: 42rem;
+    margin-top: var(--space-6);
+  }
+  .posts h3 {
+    margin-bottom: var(--space-2);
+  }
+  .posts ul {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+  .posts li + li {
+    margin-top: var(--space-1);
   }
   .figures {
     display: grid;
