@@ -144,10 +144,6 @@
   ],
   "publicationProfiles": [
     {
-      "label": "ORCID",
-      "url": "https://orcid.org/0000-0001-6831-3327"
-    },
-    {
       "label": "OpenAlex",
       "url": "https://openalex.org/A5059697582"
     }
@@ -222,11 +218,6 @@
         "label": "LinkedIn",
         "handle": "linkedin.com/in/mislav-jordanic",
         "url": "https://www.linkedin.com/in/mislav-jordanic-85848443/"
-      },
-      {
-        "label": "ORCID",
-        "handle": "0000-0001-6831-3327",
-        "url": "https://orcid.org/0000-0001-6831-3327"
       }
     ]
   },

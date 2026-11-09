@@ -41,7 +41,7 @@ const person = {
     "@type": "CollegeOrUniversity",
     name,
   })),
-  // Profiles plus the matching Lamis team page, deduplicated (ORCID is in both lists).
+  // Profiles plus the matching Lamis team page, deduplicated.
   sameAs: [
     ...cv.contact.links.map((l) => l.url),
     ...cv.publicationProfiles.map((p) => p.url),
