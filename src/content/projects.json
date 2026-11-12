@@ -126,12 +126,13 @@
       "slug": "cv-writer",
       "name": "CV writer",
       "kicker": "LLM agents · LangGraph",
-      "summary": "An agentic workflow that drafts a CV and cover letter for a specific job. It reads your existing documents, extracts the job requirements, researches the company, retrieves relevant past projects and iterates on drafts with a critique step, pausing for your input at each decision.",
+      "summary": "A command-line tool that tailors a CV and cover letter to one job ad. It reads my CV and the ad, researches the company, retrieves relevant past projects, writes the drafts and turns them into PDFs. Afterwards I can ask for changes in plain English, such as adding a research stay or making the titles blue.",
       "details": [
-        "LangGraph state machine with separate agents for reading, research, retrieval, routing, writing and critique.",
-        "Two-stage retrieval: vector similarity followed by an LLM relevance check.",
-        "Drafts are scored and refined until they pass a quality threshold; every version is kept.",
-        "PDFs are produced through LLM-written LaTeX, with compiler errors fed back for repair."
+        "A LangGraph state machine with separate agents for reading, research, retrieval, routing, writing and critique. It pauses for my input at each decision.",
+        "Two-stage retrieval from a portfolio file: vector similarity, then an LLM check that each project is really relevant.",
+        "A critique agent scores each draft on content, ATS compatibility and job fit. Refinement has a small budget: one automatic redraft, and at most one more if the score rose. Every version is kept, and the best draft for the request is chosen.",
+        "PDFs come from LLM-written LaTeX; compiler errors are fed back to the model for repair, and style changes can be requested after the fact.",
+        "It runs from a terminal on my own machine with paid OpenAI and Tavily keys (a session on the sample files costs about 2 US cents), or on a local Ollama model for testing. Offline tests run without keys."
       ],
       "tech": [
         "Python",
@@ -143,8 +144,21 @@
       ],
       "repo": "https://github.com/mjordanic/CV_editor",
       "live": null,
-      "liveNote": "Runs locally from the command line; there is no hosted demo.",
-      "posts": [],
+      "liveNote": "Runs locally from the command line and needs Python 3.12, LaTeX and API keys; there is no hosted demo.",
+      "posts": [
+        {
+          "title": "Inside a LangGraph app, part 1: how my CV writer is wired",
+          "url": "https://lamis-technologies.hr/blog/cv-writer-langgraph/"
+        },
+        {
+          "title": "Is the graph worth it? Testing my LangGraph CV writer against a single prompt (Part 2)",
+          "url": "https://lamis-technologies.hr/blog/cv-writer-validation/"
+        },
+        {
+          "title": "Let the compiler grade the AI: self-repairing LaTeX PDFs",
+          "url": "https://lamis-technologies.hr/blog/cv-writer-self-repairing-latex/"
+        }
+      ],
       "images": [
         {
           "file": "workflow-graph.png",
