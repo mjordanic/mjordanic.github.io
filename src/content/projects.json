@@ -126,15 +126,15 @@
       "slug": "cv-writer",
       "name": "CV writer",
       "kicker": "LLM agents · LangGraph",
-      "summary": "A command-line tool that tailors a CV and a cover letter to one job ad, built as a LangGraph state machine of cooperating agents. Separate agents read my documents, research the company, retrieve relevant past projects, write, critique and fact-check the drafts, and turn them into PDFs. A router decides each next step, and the program pauses to ask me whenever it needs a decision. Afterwards I can ask for changes in plain English, such as adding a research stay or making the titles blue.",
+      "summary": "A command-line tool that tailors a CV and a cover letter to one job ad, built as a LangGraph state machine of cooperating agents. Separate agents read the candidate's documents, research the company, retrieve relevant past projects, write, critique and fact-check the drafts, and turn them into PDFs. A router decides each next step, and the program pauses to ask the user whenever a decision is needed. Afterwards changes can be requested in plain English, such as adding a research stay or making the titles blue.",
       "details": [
-        "The whole program is one LangGraph state machine: 17 steps that share a single notepad of everything done so far. Separate agents handle reading my documents, analysing the job ad, researching the company, retrieving experience, writing, critique, fact checking and PDF generation.",
-        "A router agent asks the model what should happen next: ask me a question, write the CV, write the cover letter, re-render a PDF, or stop. Plain Python code decides which choices the model may pick from and checks its answer, so a slip by a cheap model costs one more question, not a broken session.",
-        "Human-in-the-loop pauses: the graph saves its state and waits for me to give the job ad, choose what to write first, supply missing details such as an e-mail address, or ask for changes, then carries on from where it stopped.",
+        "The whole program is one LangGraph state machine: 17 steps that share a single notepad of everything done so far. Separate agents handle reading the user's documents, analysing the job ad, researching the company, retrieving experience, writing, critique, fact checking and PDF generation.",
+        "A router agent asks the model what should happen next: ask the user a question, write the CV, write the cover letter, re-render a PDF, or stop. Plain Python code decides which choices the model may pick from and checks its answer, so a slip by a cheap model costs one more question, not a broken session.",
+        "Human-in-the-loop pauses: the graph saves its state and waits for the user to give the job ad, choose what to write first, supply missing details such as an e-mail address, or ask for changes, then carries on from where it stopped.",
         "Two-stage retrieval from a portfolio file: vector similarity first, then an LLM check that each project is really relevant to the ad.",
-        "A critique loop: a critique agent scores each draft on content, ATS compatibility and job fit, and a separate fact check flags claims my material does not support. Refinement has a small budget of one automatic redraft, and at most one more if the draft improved. Every version is kept and the best one is chosen.",
+        "A critique loop: a critique agent scores each draft on content, ATS compatibility and job fit, and a separate fact check flags claims the user's material does not support. Refinement has a small budget of one automatic redraft, and at most one more if the draft improved. Every version is kept and the best one is chosen.",
         "Self-repairing PDFs: an LLM writes the LaTeX, the compiler tries it, and any errors are fed back to the model for repair. Style changes can be requested after the fact without rewriting the text.",
-        "It runs from a terminal on my own machine with paid OpenAI and Tavily keys (a session on the sample files costs about 3 US cents), or on a local Ollama model for testing. Offline tests run without keys."
+        "It runs from a terminal on the user's own machine with paid OpenAI and Tavily keys (a session on the sample files costs about 3 US cents), or on a local Ollama model for testing. Offline tests run without keys."
       ],
       "tech": [
         "Python",
