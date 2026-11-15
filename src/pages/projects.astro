@@ -17,7 +17,7 @@ const names = data.projects.map((p) => p.name);
     <header class="page-head">
       <h1>Projects</h1>
       <p class="lede">
-        Personal projects I build to try out ideas end to end, from data to a small working interface. All the code is on{" "}
+        Personal projects I build to try out ideas end to end, from data to a small working interface. The public code is on{" "}
         <a href={github.url}>GitHub</a>.
       </p>
       <nav aria-label="Projects on this page">
@@ -61,9 +61,11 @@ const names = data.projects.map((p) => p.name);
                   Open live demo <span aria-hidden="true">↗</span>
                 </a>
               )}
-              <a class="btn" href={p.repo}>
-                Code on GitHub <span aria-hidden="true">↗</span>
-              </a>
+              {p.repo && (
+                <a class="btn" href={p.repo}>
+                  Code on GitHub <span aria-hidden="true">↗</span>
+                </a>
+              )}
             </div>
             {p.liveNote && <p class="note muted">{p.liveNote}</p>}
             {p.posts.length > 0 && (

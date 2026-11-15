@@ -190,8 +190,8 @@ const authorParts = (authors: string) => authors.split(/(M\. Jordanić)/);
       <h2 id="proj-h">Projects</h2>
       <div>
         <p class="muted">
-          Personal projects I build to try out ideas end to end, from data to a small working interface. The code for each
-          is on GitHub; <a href="/projects/">the projects page</a> has screenshots and more detail.
+          Personal projects I build to try out ideas end to end, from data to a small working interface. The public code is on
+          GitHub; <a href="/projects/">the projects page</a> has screenshots and more detail.
         </p>
         <ul class="project-list">
           {
@@ -217,9 +217,11 @@ const authorParts = (authors: string) => authors.split(/(M\. Jordanić)/);
                       Live demo <span aria-hidden="true">↗</span>
                     </a>
                   )}
-                  <a href={p.repo}>
-                    Code <span aria-hidden="true">↗</span>
-                  </a>
+                  {p.repo && (
+                    <a href={p.repo}>
+                      Code <span aria-hidden="true">↗</span>
+                    </a>
+                  )}
                 </p>
               </li>
             ))
