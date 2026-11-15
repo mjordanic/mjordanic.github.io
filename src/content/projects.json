@@ -209,6 +209,40 @@
           "alt": "Diagram of the AeroGrid loop: a digital twin streams samples and SMARD prices to a trigger manager, which runs price forecasting, optimisation, a reschedule proposal, an approval gate and plan commit."
         }
       ]
+    },
+    {
+      "slug": "keepfinch",
+      "name": "Keepfinch",
+      "kicker": "Mobile app · offline-first · React Native",
+      "summary": "Snap it, rate it, compare it. Keepfinch turns a day of flea-market stalls, wine tastings or festival stands into a sortable table on the phone. One photo or one value is enough to save an entry, and one tap sorts the best or the cheapest to the top. No account, no server, and no signal needed.",
+      "details": [
+        "Offline-first: no account and no server, and every entry stays on the device.",
+        "Templates for one-off events and for lists that grow over time, with custom fields: text, number, money, rating, date, choice, tags, yes/no and link.",
+        "The Matrix: sort and filter every entry by any field.",
+        "Export to zip (CSV, JSON and photos), plus full backup and restore.",
+        "The app's rules, storage and export live in a core package that doesn't depend on React Native, so they're tested on their own."
+      ],
+      "tech": [
+        "TypeScript",
+        "React Native",
+        "Expo",
+        "SQLite",
+        "Vitest"
+      ],
+      "repo": null,
+      "live": null,
+      "liveNote": "An early test version for Android and iPhone; not in the app stores yet.",
+      "posts": [],
+      "images": [
+        {
+          "file": "new-entry.png",
+          "alt": "Keepfinch new-entry form for a beer on a phone: a name filled in as Pilsner, then notes, brewery, style, alcohol percentage, a 0.5 to 5 rating picker and a price in euros."
+        },
+        {
+          "file": "matrix.png",
+          "alt": "Keepfinch Matrix for a Beers collection on a phone: a table with one row each for Pilsner, Stout and Pale ale, columns for name, notes and capture time, and a Filters control above it."
+        }
+      ]
     }
   ]
 }
