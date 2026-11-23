@@ -5,11 +5,11 @@
       "slug": "hikesalike",
       "name": "HikesAlike",
       "kicker": "Similarity search · geospatial",
-      "summary": "Pick a hike you enjoyed and HikesAlike lists other hikes in Europe that feel similar: comparable length, climb, highest point, landscape and typical weather. You can also describe a hike instead of naming one, and limit results to a driving time from a starting town.",
+      "summary": "Pick a hike you enjoyed and HikesAlike lists other hikes in Europe and the United States that feel similar: comparable length, climb, highest point, landscape and typical weather. You can also describe a hike instead of naming one, and limit results to a driving time from a starting town.",
       "details": [
-        "Builds a catalogue of roughly 250,000 day hikes and day stages from OpenStreetMap, enriched with elevation, land cover and climate data.",
+        "Builds a catalogue of nearly 900,000 day hikes and day stages from OpenStreetMap, enriched with elevation, land cover and climate data.",
         "Each hike becomes a feature vector; similarity weights are adjustable in the interface.",
-        "Optional drive-time filter through a self-hosted Valhalla routing engine.",
+        "Optional drive-time filter, up to 3 hours, through a self-hosted Valhalla routing engine.",
         "Served as a small read-only export on Google Cloud Run."
       ],
       "tech": [
