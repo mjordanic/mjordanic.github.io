@@ -41,6 +41,43 @@
       ]
     },
     {
+      "slug": "carenav",
+      "name": "CareNav",
+      "kicker": "LLM agents · RAG · AI safety",
+      "summary": "A demo AI co-pilot for families caring for someone with dementia. It answers questions about benefits, legal steps, everyday care and who to call, for the family's own country, and every factual answer links to the official source it comes from. A safety check reads each message first, and a message about danger gets the country's emergency numbers instead of an AI answer.",
+      "details": [
+        "A safety check runs before every answer; emergencies get a fixed panel with the country's numbers, written in advance rather than by the AI.",
+        "A small tool-calling loop in plain Python, with no agent framework: five read-only tools for library search, entitlements, next steps, emergency contacts and a web lookup limited to approved official sites.",
+        "Multilingual hybrid search with reranking, limited to the family's country by the search itself.",
+        "Plain code checks that every fact cites a source the tools returned; if none is found, it gives a fixed \"no vetted source\" reply.",
+        "A spend ledger with daily and monthly caps, rate limits and a kill switch keeps costs bounded.",
+        "Croatia has full content in Croatian and English; countries and languages are data packs, so a new country needs content, not code."
+      ],
+      "tech": [
+        "Python",
+        "Claude Haiku",
+        "RAG",
+        "LanceDB",
+        "FastAPI",
+        "HTMX"
+      ],
+      "repo": null,
+      "live": "https://carenav.lamis-technologies.hr",
+      "liveNote": "Access is by invite code: sign in with the shared code Ri7f8KBVaOi5G4dx3Qs5TA, also given in the blog post. Content is drafted from official sources and not professionally verified.",
+      "posts": [
+        {
+          "title": "Cite It or Say Nothing: Inside an AI Co-pilot for Dementia Caregivers",
+          "url": "https://lamis-technologies.hr/blog/carenav-agent/"
+        }
+      ],
+      "images": [
+        {
+          "file": "one-question.png",
+          "alt": "Flow of one question through CareNav: a safety check first, with a fixed emergency panel for red and a gentler answer with help lines for amber; then an assistant loop where a language model calls library search, entitlement cards, next steps, emergency contacts and a limited web lookup; then a citation check that either passes the answer with source cards, retries once, or shows a fixed no-vetted-source reply; and a spend ledger with daily and monthly caps underneath."
+        }
+      ]
+    },
+    {
       "slug": "supply-chain",
       "name": "Supply chain simulator",
       "kicker": "Simulation · inventory policy · RL",
